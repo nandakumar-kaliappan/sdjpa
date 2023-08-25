@@ -1,8 +1,10 @@
 package com.knkweb.sdjpa.bootstrap;
 
 import com.knkweb.sdjpa.domain.Author;
+import com.knkweb.sdjpa.domain.AuthorUuid;
 import com.knkweb.sdjpa.domain.Book;
 import com.knkweb.sdjpa.repository.AuthorRepository;
+import com.knkweb.sdjpa.repository.AuthorUuidRepository;
 import com.knkweb.sdjpa.repository.BookRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -13,10 +15,13 @@ import org.springframework.stereotype.Component;
 public class DataInitializer implements CommandLineRunner {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final AuthorUuidRepository authorUuidRepository;
 
-    public DataInitializer(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public DataInitializer(BookRepository bookRepository, AuthorRepository authorRepository,
+                           AuthorUuidRepository authorUuidRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.authorUuidRepository = authorUuidRepository;
     }
 
     @Override
@@ -49,7 +54,10 @@ public class DataInitializer implements CommandLineRunner {
 
         authorRepository.findAll().forEach(System.out::println);
 
-
+        AuthorUuid s =
+                AuthorUuid.builder().firstName("Jaggi").lastName("Vasudev").build();
+        AuthorUuid savedS = authorUuidRepository.save(s);
+        System.out.println(savedS.getId());
 
 
     }

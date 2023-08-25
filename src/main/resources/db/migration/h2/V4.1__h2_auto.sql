@@ -7,11 +7,11 @@ CREATE TABLE book(
     publisher varchar(255),
     title varchar(255),
     primary key (id)
-)
+);
 
 CREATE TABLE author(
     id IDENTITY NOT NULL,
     first_name varchar(255),
     last_name varchar(255),
     primary key (id)
-)
+);
